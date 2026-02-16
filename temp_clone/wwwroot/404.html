@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventEase - Event Management Application</title>
+    <base href="/EventEase-Blazor/" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="EventEase.styles.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+</head>
+<body>
+    <div id="app">Loading...</div>
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        // Redirect to index.html for client-side routing
+        sessionStorage.redirect = location.pathname;
+        location.replace(location.pathname.split('/').slice(0, -1).join('/') + '/index.html');
+    </script>
+</body>
+</html>

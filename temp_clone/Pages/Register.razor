@@ -1,0 +1,24 @@
+@page "/register"
+
+<PageTitle>Register - EventEase</PageTitle>
+
+<h1>Event Registration</h1>
+
+<RegistrationForm OnRegistrationComplete="HandleRegistrationComplete" />
+
+@if (!string.IsNullOrEmpty(registrationMessage))
+{
+    <div class="alert alert-success">
+        @registrationMessage
+    </div>
+}
+
+@code {
+    private string? registrationMessage;
+
+    private void HandleRegistrationComplete(string message)
+    {
+        registrationMessage = message;
+        StateHasChanged();
+    }
+}

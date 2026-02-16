@@ -1,0 +1,123 @@
+@using EventEase.Models
+@inject EventService EventService
+
+<div class="attendance-tracker">
+    <h2>Event Attendance</h2>
+    
+    <div class="event-selector">
+        <label>Select Event:</label>
+        <select @bind="selectedEventId" @bind:event="onchange" @onchange="OnEventChanged" class="form-control">
+            <option value="0">All Events</option>
+            @foreach (var evt in events)
+            {
+                <option value="@evt.Id">@evt.Title - @evt.Date.ToString("MM/dd/yyyy")</option>
+            }
+        </select>
+    </div>
+    
+    <div class="attendance-stats">
+        <div class="stat-card">
+            <h3>Total Events</h3>
+            <p class="stat-number">@events.Count</p>
+        </div>
+        <div class="stat-card">
+            <h3>Total Attendees</h3>
+            <p class="stat-number">@totalAttendees</p>
+        </div>
+        <div class="stat-card">
+            <h3>Selected Event Attendees</h3>
+            <p class="stat-number">@selectedEventAttendees</p>
+        </div>
+    </div>
+    
+    <div class="attendance-list">
+        <h3>Attendee List</h3>
+        @if (selectedEventId == 0)
+        {
+            <p>Select an event to view attendees.</p>
+        }
+        else
+        {
+            @if (attendees.Any())
+            {
+                <table class="attendance-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Registration Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var attendee in attendees)
+                        {
+                            <tr>
+                                <td>@attendee.FullName</td>
+                                <td>@attendee.Email</td>
+                                <td>@attendee.Phone</td>
+                                <td>@attendee.RegistrationDate.ToString("MM/dd/yyyy HH:mm")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No attendees registered for this event yet.</p>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    private List<Event> events = new List<Event>();
+    private List<Attendee> attendees = new List<Attendee>();
+    private int selectedEventId = 0;
+    private int totalAttendees = 0;
+    private int selectedEventAttendees = 0;
+
+    protected override void OnInitialized()
+    {
+        events = EventService.GetAllEvents();
+        LoadAttendees();
+    }
+
+    private void LoadAttendees()
+    {
+        // Simulate loading attendees
+        attendees = GetAttendeesForEvent(selectedEventId);
+        totalAttendees = GetAllAttendees().Count;
+        selectedEventAttendees = attendees.Count;
+    }
+
+    private void OnEventChanged(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int eventId))
+        {
+            selectedEventId = eventId;
+            LoadAttendees();
+            StateHasChanged();
+        }
+    }
+
+    private List<Attendee> GetAttendeesForEvent(int eventId)
+    {
+        if (eventId == 0)
+            return new List<Attendee>();
+        
+        // Simulated data - in a real app, this would come from a database
+        return GetAllAttendees().Where(a => a.EventId == eventId).ToList();
+    }
+
+    private List<Attendee> GetAllAttendees()
+    {
+        // Simulated data
+        return new List<Attendee>
+        {
+            new Attendee { Id = 1, FullName = "John Doe", Email = "john@example.com", Phone = "555-0101", EventId = 1, RegistrationDate = DateTime.Now.AddDays(-5) },
+            new Attendee { Id = 2, FullName = "Jane Smith", Email = "jane@example.com", Phone = "555-0102", EventId = 1, RegistrationDate = DateTime.Now.AddDays(-3) },
+            new Attendee { Id = 3, FullName = "Bob Johnson", Email = "bob@example.com", Phone = "555-0103", EventId = 2, RegistrationDate = DateTime.Now.AddDays(-2) }
+        };
+    }
+}

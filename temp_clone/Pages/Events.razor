@@ -1,0 +1,49 @@
+@page "/events"
+@inject EventService EventService
+
+<PageTitle>Events - EventEase</PageTitle>
+
+<h1>Events</h1>
+
+<div class="events-container">
+    @if (events == null || !events.Any())
+    {
+        <p>No events available. Create your first event below!</p>
+    }
+    else
+    {
+        @foreach (var evt in events)
+        {
+            <EventCard Event="evt" OnEventUpdated="HandleEventUpdated" />
+        }
+    }
+</div>
+
+<div class="new-event-section">
+    <h2>Create New Event</h2>
+    <EventCard Event="newEvent" OnEventUpdated="HandleNewEvent" />
+</div>
+
+@code {
+    private List<Event>? events;
+    private Event newEvent = new Event();
+
+    protected override void OnInitialized()
+    {
+        events = EventService.GetAllEvents();
+    }
+
+    private void HandleEventUpdated(Event updatedEvent)
+    {
+        EventService.UpdateEvent(updatedEvent);
+        StateHasChanged();
+    }
+
+    private void HandleNewEvent(Event newEvent)
+    {
+        EventService.AddEvent(newEvent);
+        this.newEvent = new Event();
+        events = EventService.GetAllEvents();
+        StateHasChanged();
+    }
+}

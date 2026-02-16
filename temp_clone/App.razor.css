@@ -1,0 +1,28 @@
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.blazor-error-boundary {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNDkiIHZpZXdCb3g9IjAgMCA1NiA0OSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE5LjQxIDQuOTJMMjAgNC41MkwyMC41OSA0LjkyTDI2LjU5IDEwLjkyTDI3IDEyTDI2LjU5IDEzLjA4TDIwLjU5IDE5LjA4TDIwIDE5LjQ4TDE5LjQxIDE5LjA4TDEzLjQxIDEzLjA4TDEzIDEyTDEzLjQxIDEwLjkyTDE5LjQxIDQuOTJaIiBmaWxsPSIjRkY2NjY2Ii8+CjxwYXRoIGQ9Ik0zNi40MSA0LjkyTDM3IDQuNTJMMzcuNTkgNC45Mkw0My41OSAxMC45Mkw0NCAxMkw0My41OSAxMy4wOEwzNy41OSAxOS4wOEwzNyAxOS40OEwzNi40MSAxOS4wOEwzMC40MSAxMy4wOEwzMCAxMkwzMC40MSAxMC45MkwzNi40MSA0LjkyWiIgZmlsbD0iI0ZGNjY2NiIvPgo8cGF0aCBkPSJNMTkgMjhMMjAgMjcuNUwyMC41OSAyOEwyNi41OSAzNEwyNyAzNS4wOEwyNi41OSAzNi4xNkwyMC41OSA0Mi4xNkwyMCA0Mi41NkwxOS40MSA0Mi4xNkwxMy40MSAzNi4xNkwxMyAzNS4wOEwxMy40MSAzNEwxOS40MSAyOEwxOSAyOFoiIGZpbGw9IiNGRjY2NjYiLz4KPHBhdGggZD0iTTM2LjQxIDI4TDM3IDI3LjVMMzcuNTkgMjhMNDMuNTkgMzRMNDQgMzUuMDhMNDMuNTkgMzYuMTZMMzcuNTkgNDIuMTZMMzcgNDIuNTZMMzYuNDEgNDIuMTZMMzAuNDEgMzYuMTZMMzAgMzUuMDhMMzAuNDEgMzRMMzYuNDEgMjhaIiBmaWxsPSIjRkY2NjY2Ii8+Cjwvc3ZnPg==) no-repeat 1rem/1.75rem, #b32121;
+    padding: 1rem 1rem 1rem 3.7rem;
+    color: white;
+}
+
+    .blazor-error-boundary::after {
+        content: "An error has occurred."
+    }
